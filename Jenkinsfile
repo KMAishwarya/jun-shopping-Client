@@ -1,14 +1,19 @@
 pipeline {
     agent any
     stages{
-        stage("Build"){
+        stage("Dotnet Restore"){
             steps{
                 sh "dotnet restore"
             }
         }
-        stage("Test"){
+        stage("Dotnet Build"){
             steps{
-                 echo "this is test"
+                sh "dotnet build -c reslase -o /opt"
+            }
+        }
+        stage("Dotnet Publish"){
+            steps{
+                sh "dotnet publish -c release -o /opt"
             }
         }
     }
